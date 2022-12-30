@@ -1,19 +1,21 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include "pcb.h"
 
 using namespace std;
 
-typedef PCB T;
+typedef PCB* T;
 
 class Heap{
     private:
-    T *heaparray;
+    //T *heaparray;
+    vector<T> heaparray;
     int count;
     int capacity;
 
     public:
-    //Heap();
+    Heap();
     Heap(int size);
     ~Heap();
     Heap(const Heap &other){
@@ -21,7 +23,8 @@ class Heap{
     
     this->capacity = other.capacity;
     this->count = other.count;
-    heaparray = new T[capacity];
+    //heaparray = new T[capacity];
+    heaparray.resize(capacity);
     for(int i = 0; i<count; i++){
         this->heaparray[i] = other.heaparray[i];
         }
@@ -32,7 +35,8 @@ class Heap{
 
         this->capacity = other.capacity;
         this->count = other.count;
-        heaparray = new T[capacity];
+        //heaparray = new T[capacity];
+        heaparray.resize(capacity);
 
         for(int i = 0; i<count; i++){
             heaparray[i] = other.heaparray[i];
@@ -49,5 +53,7 @@ class Heap{
     void decreaseKey(int index, T new_val);
     void heapify(int index);
     void deleteKey(int index);
+    void displayAll();
+    int size();
 
 };

@@ -22,6 +22,7 @@ private:
     // choose a data structure for the PCBTable. You can use an array of PCB pointers, e.g. vector<PCB *>. 
     int pid;  // id
     vector<PCB *> table;  // array of PCB pointers
+    int count;
 public:
     /**
      * @brief Construct a new PCBTable object of the given size (number of PCBs)

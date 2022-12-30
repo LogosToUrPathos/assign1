@@ -9,8 +9,8 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-#include "readyqueue.h"
-#include "pcbtable.h"
+#include "readyqueue.cpp"
+#include "pcbtable.cpp"
 
 using namespace std;
 

@@ -8,8 +8,8 @@
  */
 
 #include <iostream>
-#include "readyqueue.h"
-#include "pcbtable.h"
+#include "readyqueue.cpp"
+#include "pcbtable.cpp"
 
 using namespace std;
 

@@ -12,6 +12,7 @@ using namespace std;
  */
  ReadyQueue::ReadyQueue()  {
      //TODO: add your code here
+     //heap(200);
  }
 
 /**
@@ -22,6 +23,9 @@ using namespace std;
 void ReadyQueue::addPCB(PCB *pcbPtr) {
     //TODO: add your code here
     // When adding a PCB to the queue, you must change its state to READY.
+    heap.insert(pcbPtr);
+    pcbPtr->setState(ProcState::READY);
+
 }
 
 /**
@@ -32,6 +36,10 @@ void ReadyQueue::addPCB(PCB *pcbPtr) {
 PCB* ReadyQueue::removePCB() {
     //TODO: add your code here
     // When removing a PCB from the queue, you must change its state to RUNNING.
+    
+    auto temp = heap.removeMin();
+    temp->setState(ProcState::RUNNING);
+    return temp;
 }
 
 /**
@@ -41,6 +49,7 @@ PCB* ReadyQueue::removePCB() {
  */
 int ReadyQueue::size() {
     //TODO: add your code here
+    return heap.size();
 }
 
 /**
@@ -48,4 +57,5 @@ int ReadyQueue::size() {
  */
 void ReadyQueue::displayAll() {
     //TODO: add your code here
+    heap.displayAll();
 }

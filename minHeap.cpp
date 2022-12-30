@@ -3,24 +3,31 @@
 Heap::Heap(int size){
     this->capacity = size;
     this->count = 0;
-    heaparray = new T[capacity];
+    //heaparray = new T[capacity];
+    heaparray.resize(capacity);
+}
+Heap::Heap(){
+    heaparray.resize(0);
+    count = 0;
 }
 
 Heap::~Heap(){
     count = 0;
-    delete[] heaparray;
+    //delete[] heaparray;
+    heaparray.clear();
 }
 
 
 
 void Heap::insert(T val){
-    if(capacity == count){ std::cout<<"OVERFLOW"<<std::endl;  return; }  // overflow
+    //if(capacity == count){ std::cout<<"OVERFLOW"<<std::endl;  return; }  // overflow
 
     count++;
     int temp = count-1;
-    heaparray[temp] = val;
+    //heaparray[temp] = val;
+    heaparray.push_back(val);
 
-    while(temp != 0 && heaparray[parent(temp)].priority > heaparray[temp].priority){
+    while(temp != 0 && heaparray[parent(temp)]->priority < heaparray[temp]->priority){
         swap(temp, parent(temp));
         temp = parent(temp);
     }
@@ -29,14 +36,14 @@ void Heap::insert(T val){
 void Heap::decreaseKey(int index, T new_val){
     heaparray[index] = new_val;
 
-    while(index != 0 && heaparray[parent(index)].priority > heaparray[index].priority){
+    while(index != 0 && heaparray[parent(index)]->priority < heaparray[index]->priority){
     swap(index, parent(index));
     index = parent(index);
   }
 }
 
 T Heap::removeMin(){
-    if(count == 0) return INT_MAX;
+    if(count == 0) return nullptr;
 
     if(count == 1){
         count--;
@@ -46,6 +53,8 @@ T Heap::removeMin(){
     T root = heaparray[0];
     heaparray[0] = heaparray[count-1];
     count--;
+    heaparray.erase(heaparray.begin() + count);
+    
 
     heapify(0);
     return root;
@@ -56,10 +65,10 @@ void Heap::heapify(int index){
     int r = right(index);
     int smallest = index;
 
-    if(l < count && heaparray[l].priority < heaparray[index].priority){
+    if(l < count && heaparray[l]->priority > heaparray[index]->priority){
     smallest = l;
     }
-    if(r < count && heaparray[r].priority < heaparray[smallest].priority){
+    if(r < count && heaparray[r]->priority > heaparray[smallest]->priority){
     smallest = r;
     }
     if(smallest != index){
@@ -69,7 +78,7 @@ void Heap::heapify(int index){
 }
 
 void Heap::deleteKey(int index){
-    decreaseKey(index, INT_MIN);
+    decreaseKey(index, nullptr);
     removeMin();
 }
 
@@ -98,4 +107,16 @@ void Heap::swap(int index1, int index2){
     T temp = heaparray[index1];
     heaparray[index1] = heaparray[index2];
     heaparray[index2] = temp;
+}
+
+void Heap::displayAll(){
+
+    std::cout<<"Display Process in ReadyQueue: "<<endl;
+    for(int i = 0; i<count; i++){
+        heaparray[i]->display();
+    }
+}
+
+int Heap::size(){
+    return count;
 }

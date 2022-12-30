@@ -1,7 +1,7 @@
 /**
  * Assignment 1: priority queue of processes
  * @file pcb.h
- * @author ??? (Fernando Landeros: your name)
+ * @author Fernando Landeros (: your name)
  * @brief This is the header file for the PCB class, a process control block.
  * @version 0.1
  */

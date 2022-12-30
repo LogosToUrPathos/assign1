@@ -27,8 +27,10 @@ PCBTable::~PCBTable() {
    // TODO: add your code here
    for(auto i = table.begin(); i!= table.end(); i++){
     delete (*i);
+    (*i) = nullptr;
    }
    table.clear();
+   
 }
 
 /**
@@ -39,12 +41,14 @@ PCBTable::~PCBTable() {
  */
 PCB* PCBTable::getPCB(unsigned int idx) {
     // TODO: add your code here
-    for(auto i = table.begin(); i!=table.end(); i++){
+    /*for(auto i = table.begin(); i!=table.end(); i++){
         if((*i)->id == idx){
             return (*i);
         }
     }
-    return nullptr;
+    */
+    
+    return table[idx];
 }
 
 /**
@@ -54,6 +58,7 @@ PCB* PCBTable::getPCB(unsigned int idx) {
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) {
     // TODO: add your code here
-    table.push_back(pcb); // I dont know what the idx is for
-    // this method just pushes pcb to the back of the list not at a particular location
+    table.insert(table.begin() + idx, pcb);  // insert is stl in vector
+    // insert takes two params, position and then value
+    // position starts from beginning of table + desired index
 }

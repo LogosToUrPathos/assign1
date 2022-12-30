@@ -11,6 +11,7 @@
 #pragma once
 
 #include "pcb.h"
+#include "minHeap.cpp"
 
 /**
  * @brief A queue of PCB's that are in the READY state to be scheduled to run.
@@ -20,7 +21,9 @@ class ReadyQueue {
 private:
     // TODO: add your private member variables here
     // choose a data structure for the ReadyQueue. No STL class is allowed.
-    int* arr = new int[10];
+    Heap heap;
+    //int* arr = new int[10];
+
 public:
     /**
      * @brief Construct a new ReadyQueue object
